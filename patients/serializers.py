@@ -12,6 +12,8 @@ class PatientSerliazer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AppointmentSerializer(serializers.ModelSerializer):
+    doctor = DoctorSerializer()
+    patient = PatientSerliazer()
     class Meta:
         model = Appointment
         fields ='__all__'
