@@ -1,7 +1,7 @@
 from enum import unique
 import django
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Appointment(models.Model):
@@ -14,6 +14,7 @@ class Appointment(models.Model):
         return f"P:{self.patient} - D:{self.doctor}"
 
 class Patient(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=50)
     email=models.CharField(max_length=50,null=True,blank=True)
     phone=models.CharField(max_length=50,null=True,blank=True)
