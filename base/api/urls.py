@@ -6,7 +6,7 @@ from base.api.views import MyTokenObtainPairView
 
 
 urlpatterns = [
-    path("auth/", include("auth.api.urls")),
+    path("auth/", include("authApp.api.urls")),
     path("doctors/", include("doctors.urls")),
     path("patients/", include("patients.urls")),
     path("token/", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
