@@ -1,9 +1,28 @@
 from django.db import models
 
+DAYS_OF_WEEK = (
+    ("sat", "Saturday"),
+    ("sun", "Sunday"),
+    ("mon", "Monday"),
+    ("tue", "Tuesday"),
+    ("wed", "Wednesday"),
+    ("thu", "Thursday"),
+    ("fri", "Friday"),
+)
 # Create your models here.
+class Schedule(models.Model):
+    doctor = models.ForeignKey(
+        "Doctor", on_delete=models.CASCADE, related_name="doctor_schedules"
+    )
+    day = models.CharField(max_length=3, choices=DAYS_OF_WEEK, blank=True)
+    time_from = models.TimeField()
+    time_to = models.TimeField(blank=True, null=True)
+
+    def __str__(self) -> str:
+        return f"{self.doctor} - Day: {self.day.capitalize()} | From {self.time_from} | To {self.time_from}"
 
 
-class Specializaion(models.Model):
+class Specialization(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self) -> str:
@@ -12,9 +31,13 @@ class Specializaion(models.Model):
 
 class Doctor(models.Model):
     name = models.CharField(max_length=30)
+    experince = models.TextField(null=True, blank=True)
     email = models.CharField(max_length=30, unique=True)
-    picture = models.ImageField(upload_to="media", null=True, blank=True)
-    specialization = models.ForeignKey("Specializaion",related_name='doctors', on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to="images", null=True, blank=True)
+    price = models.DecimalField(max_digits=7, decimal_places=1, null=True, blank=True)
+    specialization = models.ForeignKey(
+        "Specialization", related_name="doctors", on_delete=models.CASCADE
+    )
 
     def __str__(self) -> str:
         return f"{self.name}"
