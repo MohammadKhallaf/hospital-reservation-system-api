@@ -2,15 +2,15 @@ from urllib import request
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-import doctors
-from doctors.models import Doctor
-from doctors.serializers import DoctorSerializer
+from doctors.models import Doctor, Specialization
+from doctors.serializers import DoctorSerializer, SpecializationSerializer
 from patients.models import Appointment
 from patients.serializers import AppointmentSerializer
 
 """
 Doctors APP ENDPOINT
 """
+
 
 @api_view(["GET"])
 def get_all_doctors(request):
@@ -44,13 +44,36 @@ def delete_doctor(request, pk):
     doctor.delete()
     return Response("deleted successfully")
 
+
 """
 Doctor Appointments
 """
 
+
 @api_view(["GET"])
-def get_doctor_appointments(request,pk):
+def get_doctor_appointments(request, pk):
     doctor = Doctor.objects.get(id=pk)
     doctor_appointments = Appointment.objects.filter(doctor=doctor)
-    doctor_appointments_serializer= AppointmentSerializer(doctor_appointments,many=True)
+    doctor_appointments_serializer = AppointmentSerializer(
+        doctor_appointments, many=True
+    )
     return Response(doctor_appointments_serializer.data)
+
+
+"""
+Specializations
+"""
+
+
+@api_view(["GET"])
+def get_all_specializations(request):
+    specs = Specialization.objects.all()
+    spec_serializer = SpecializationSerializer(specs, many=True)
+    return Response(spec_serializer.data)
+
+
+@api_view(["GET"])
+def get_specialization_doctors(request,pk):
+    doctors = Doctor.objects.filter(specialization_id=pk)
+    doctors_serializer = DoctorSerializer(doctors,many=True)
+    return Response(doctors_serializer.data)
