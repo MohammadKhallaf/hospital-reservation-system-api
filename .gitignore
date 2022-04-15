@@ -11,7 +11,7 @@ db.sqlite3-journal
 
 /media
 migrations
-/static
+/staticfiles
 
 # Environments
 .env
