@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ca205f5e.css",
+    "main.js": "/static/js/main.2a3145e4.js",
+    "static/media/header-3.jpg": "/static/media/header-3.c502ede5fe78c5a62739.jpg",
+    "static/media/header-1.jpg": "/static/media/header-1.76a5ac927c2189976dc8.jpg",
+    "static/media/header-2.jpg": "/static/media/header-2.87f691449c87674ffc40.jpg",
+    "static/media/dentist.jpg": "/static/media/dentist.a08463fd20e649d5021e.jpg",
+    "index.html": "/index.html",
+    "main.ca205f5e.css.map": "/static/css/main.ca205f5e.css.map",
+    "main.2a3145e4.js.map": "/static/js/main.2a3145e4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca205f5e.css",
+    "static/js/main.2a3145e4.js"
+  ]
+}
