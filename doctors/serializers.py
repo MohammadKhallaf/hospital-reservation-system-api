@@ -17,7 +17,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
 class DoctorSerializer(serializers.ModelSerializer):
     specialization = SpecializationSerializer()
     doctor_schedules = ScheduleSerializer(many=True)
-
+    
     class Meta:
         model = Doctor
         fields = "__all__"
