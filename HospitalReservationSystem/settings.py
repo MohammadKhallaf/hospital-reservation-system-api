@@ -189,7 +189,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Heroku Additional settings
 
-# DATABASES['default'] = dj_database_url.config()
+DATABASES['default'] = dj_database_url.config()
 
 django_on_heroku.settings(locals())
 
