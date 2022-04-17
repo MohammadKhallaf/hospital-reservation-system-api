@@ -1,4 +1,3 @@
-from enum import unique
 import django
 from django.db import models
 from django.contrib.auth.models import User
@@ -11,7 +10,7 @@ class Appointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
     def __str__(self) -> str:
-        return f"P:{self.patient} - D:{self.doctor}"
+        return f"P:{self.patient} - Dr:{self.doctor} || {self.date} {self.time}"
 
 class Patient(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
