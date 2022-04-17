@@ -32,6 +32,7 @@ DEBUG = config("DEBUG", cast=bool, default=False)
 ALLOWED_HOSTS = config(
     "ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")]
 )
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
@@ -66,7 +67,7 @@ MIDDLEWARE = [
 ]
 
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+# CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=lambda v: [s.strip() for s in v.split(",")])
 ROOT_URLCONF = "HospitalReservationSystem.urls"
 
 TEMPLATES = [
@@ -187,6 +188,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Heroku Additional settings
-DATABASE_URL = config("DATABASE_URL")
+
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
 django_on_heroku.settings(locals())
+
+
+
