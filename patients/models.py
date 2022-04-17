@@ -11,7 +11,10 @@ class Appointment(models.Model):
     time = models.TimeField()
     def __str__(self) -> str:
         return f"P:{self.patient} - Dr:{self.doctor} || {self.date} {self.time}"
+    class Meta:
+        ordering = ('-date','-time')
 
+        
 class Patient(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     name = models.CharField(max_length=50)
