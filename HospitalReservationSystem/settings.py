@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     "authApp",
     "doctors",
     "patients",
-    "hospitalAdmin",
 ]
 
 MIDDLEWARE = [
