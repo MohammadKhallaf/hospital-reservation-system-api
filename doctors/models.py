@@ -13,8 +13,10 @@ GENDER = (
     ("male", "male"),
     ("female", "female"),
 )
-# Create your models here.
+
+
 class Schedule(models.Model):
+
     doctor = models.ForeignKey(
         "Doctor", on_delete=models.CASCADE, related_name="doctor_schedules"
     )
@@ -27,6 +29,7 @@ class Schedule(models.Model):
 
 
 class Specialization(models.Model):
+
     name = models.CharField(max_length=100)
     picture = models.ImageField(upload_to="images", null=True, blank=True)
 
@@ -35,6 +38,7 @@ class Specialization(models.Model):
 
 
 class Doctor(models.Model):
+
     name = models.CharField(max_length=30)
     gender = models.CharField(max_length=7, choices=GENDER, null=True, blank=True)
     experience = models.TextField(null=True, blank=True)
