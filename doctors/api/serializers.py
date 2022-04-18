@@ -17,6 +17,9 @@ class ScheduleSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+
+
+
 class DoctorSerializer(serializers.ModelSerializer):
     specialization = SpecializationSerializer()
     doctor_schedules = ScheduleSerializer(many=True)

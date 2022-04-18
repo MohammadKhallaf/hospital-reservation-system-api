@@ -1,3 +1,4 @@
+from functools import partial
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
@@ -32,13 +33,11 @@ def get_all_doctors(request):
 @permission_classes([IsAuthenticated])
 def create_new_doctor(request):
 
-    doctor_serializer = DoctorSerializer(data=request.data)
+    doctor_instance = Doctor.objects.create(**request.data)
 
-    if doctor_serializer.is_valid():
-        doctor_serializer.save()
-        return Response(doctor_serializer.data, status=status.HTTP_201_CREATED)
+    doctor_serializer = DoctorSerializer(doctor_instance)
 
-    return Response(doctor_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return Response(doctor_serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(["PUT"])
@@ -46,7 +45,9 @@ def create_new_doctor(request):
 def update_doctor(request, pk):
 
     doctor = Doctor.objects.get(id=pk)
-    doctor_serializer = DoctorSerializer(instance=doctor, data=request.data)
+    doctor_serializer = DoctorSerializer(
+        instance=doctor, data=request.data, partial=True
+    )
 
     if doctor_serializer.is_valid():
         doctor_serializer.save()
