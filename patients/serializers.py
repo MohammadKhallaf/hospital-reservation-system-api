@@ -12,7 +12,6 @@ class PatientSerializer(serializers.ModelSerializer):
 class AppointmentSerializer(serializers.ModelSerializer):
     doctor_id = serializers.ReadOnlyField()
     patient_id = serializers.ReadOnlyField()
-
     class Meta:
         model = Appointment
         fields = "__all__"

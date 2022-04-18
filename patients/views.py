@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from patients.models import Appointment
+from patients.models import Appointment, Patient
 from patients.serializers import AppointmentSerializer
 
 # Create your views here.
@@ -24,7 +24,9 @@ def get_all_appointments(request):
 @permission_classes([IsAuthenticated])
 def create_appointment(request):
     data = request.data
-    data["patient"] = request.user.id
+    patient = Patient.objects.get(user_id=request.user.id)
+    data["patient"] = patient.id
+    print(data)
     appointment_serializer = AppointmentSerializer(data=data)
     if appointment_serializer.is_valid():
         appointment_serializer.save()
