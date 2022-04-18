@@ -28,6 +28,7 @@ class Schedule(models.Model):
 
 class Specialization(models.Model):
     name = models.CharField(max_length=100)
+    picture = models.ImageField(upload_to="images", null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.name}"
@@ -36,7 +37,7 @@ class Specialization(models.Model):
 class Doctor(models.Model):
     name = models.CharField(max_length=30)
     gender = models.CharField(max_length=7, choices=GENDER, null=True, blank=True)
-    experince = models.TextField(null=True, blank=True)
+    experience = models.TextField(null=True, blank=True)
     email = models.CharField(max_length=30, unique=True)
     picture = models.ImageField(upload_to="images", null=True, blank=True)
     fees = models.DecimalField(max_digits=7, decimal_places=1, null=True, blank=True)

@@ -9,4 +9,6 @@ urlpatterns = [
     path("appointments/<str:pk>", views.get_doctor_appointments),
     path("specializations/", views.get_all_specializations),
     path("specializations/<str:pk>", views.get_specialization_doctors),
+    path("<str:pk>/pdf/", views.get_date_appointments),
+    path("appointments/", views.get_all_appointments),
 ]

@@ -3,13 +3,18 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from doctors.models import Doctor, Specialization
-from doctors.serializers import DoctorSerializer, SpecializationSerializer
+from doctors.serializers import (
+    DoctorAppointmentSerializer,
+    DoctorSerializer,
+    SpecializationSerializer,
+)
 from patients.models import Appointment
 from patients.serializers import AppointmentSerializer
 
 """
 Doctors Endpoint
 """
+
 
 @api_view(["GET"])
 def get_all_doctors(request):
@@ -80,3 +85,24 @@ def get_specialization_doctors(request, pk):
     doctors = Doctor.objects.filter(specialization_id=pk)
     doctors_serializer = DoctorSerializer(doctors, many=True)
     return Response(doctors_serializer.data)
+
+
+"""
+Doctor report
+"""
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def get_date_appointments(request, pk):
+    appointments = Appointment.objects.filter(doctor_id=pk, date=request.data["date"])
+    apntmnt_srlzr = DoctorAppointmentSerializer(appointments, many=True)
+    return Response(apntmnt_srlzr.data)
+
+
+# @permission_classes([IsAuthenticated])
+@api_view(["GET"])
+def get_all_appointments(request):
+    appointments = Appointment.objects.all().order_by("-date")
+    apntmnt_srlzr = DoctorAppointmentSerializer(appointments, many=True)
+    return Response(apntmnt_srlzr.data)
