@@ -174,7 +174,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
-    BASE_DIR / 'build'/'static'
+    BASE_DIR / 'build' / 'static',
+    
 
 ]
 MEDIA_URL = "media/"
@@ -188,8 +189,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Heroku Additional settings
-
-DATABASES['default'] = dj_database_url.config()
+if not DEBUG:
+    DATABASES['default'] = dj_database_url.config()
 
 django_on_heroku.settings(locals())
 
